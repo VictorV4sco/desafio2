@@ -32,7 +32,7 @@ public class Participante {
 	@JoinTable(name = "tb_participante_atividade",
 			joinColumns = @JoinColumn(name = "participante_id"),
 			inverseJoinColumns = @JoinColumn(name = "atividade_id"))
-	private Set<Atividade> atividades = new HashSet<Atividade>();
+	private Set<Atividade> atividades = new HashSet<>();
 	
 	public Participante() {
 	}

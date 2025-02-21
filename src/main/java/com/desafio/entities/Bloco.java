@@ -27,18 +27,18 @@ public class Bloco {
 	private Instant fim;
 	
 	@ManyToOne
-	@JoinColumn(name = "atividades_id")
-	private Atividade atividades;
+	@JoinColumn(name = "atividade_id")
+	private Atividade atividade;
 	
 	public Bloco() {
 	}
 
-	public Bloco(Long id, Instant inicio, Instant fim, Atividade atividades) {
+	public Bloco(Long id, Instant inicio, Instant fim, Atividade atividade) {
 		super();
 		this.id = id;
 		this.inicio = inicio;
 		this.fim = fim;
-		this.atividades = atividades;
+		this.atividade = atividade;
 	}
 
 	public Long getId() {
@@ -66,16 +66,16 @@ public class Bloco {
 	}
 
 	public Atividade getAtividades() {
-		return atividades;
+		return atividade;
 	}
 
 	public void setAtividades(Atividade atividades) {
-		this.atividades = atividades;
+		this.atividade = atividades;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(atividades, fim, id, inicio);
+		return Objects.hash(atividade, fim, id, inicio);
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class Bloco {
 		if (getClass() != obj.getClass())
 			return false;
 		Bloco other = (Bloco) obj;
-		return Objects.equals(atividades, other.atividades) && Objects.equals(fim, other.fim)
+		return Objects.equals(atividade, other.atividade) && Objects.equals(fim, other.fim)
 				&& Objects.equals(id, other.id) && Objects.equals(inicio, other.inicio);
 	}
 

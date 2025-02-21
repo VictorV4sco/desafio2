@@ -33,14 +33,14 @@ public class Atividade {
 	private Double preco;
 	
 	@ManyToMany(mappedBy = "atividades")
-	private Set<Participante> participantes = new HashSet<Participante>();
+	private Set<Participante> participantes = new HashSet<>();
 	
 	@ManyToOne
 	@JoinColumn(name = "categorias_id")
 	private Categoria categorias;
 	
-	@OneToMany(mappedBy = "atividades")
-	private Set<Bloco> blocos = new HashSet<Bloco>();
+	@OneToMany(mappedBy = "atividade")
+	private Set<Bloco> blocos = new HashSet<>();
 	
 	public Atividade() {
 	}
