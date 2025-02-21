@@ -1,12 +1,17 @@
 package com.desafio.entities;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,14 +28,21 @@ public class Participante {
 	@Column
 	private String email;
 	
+	@ManyToMany
+	@JoinTable(name = "tb_participante_atividade",
+			joinColumns = @JoinColumn(name = "participante_id"),
+			inverseJoinColumns = @JoinColumn(name = "atividade_id"))
+	private Set<Atividade> atividades = new HashSet<Atividade>();
+	
 	public Participante() {
 	}
 
-	public Participante(Long id, String name, String email) {
+	public Participante(Long id, String name, String email, Set<Atividade> atividades) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.atividades = atividades;
 	}
 
 	public Long getId() {
@@ -57,9 +69,17 @@ public class Participante {
 		this.email = email;
 	}
 
+	public Set<Atividade> getAtividades() {
+		return atividades;
+	}
+
+	public void setAtividades(Set<Atividade> atividades) {
+		this.atividades = atividades;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, name);
+		return Objects.hash(atividades, email, id, name);
 	}
 
 	@Override
@@ -71,9 +91,8 @@ public class Participante {
 		if (getClass() != obj.getClass())
 			return false;
 		Participante other = (Participante) obj;
-		return Objects.equals(email, other.email) && Objects.equals(id, other.id) && Objects.equals(name, other.name);
+		return Objects.equals(atividades, other.atividades) && Objects.equals(email, other.email)
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
-	
-	
 
 }

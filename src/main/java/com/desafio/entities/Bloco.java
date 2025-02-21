@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,14 +26,19 @@ public class Bloco {
 	@Column
 	private Instant fim;
 	
+	@ManyToOne
+	@JoinColumn(name = "atividades_id")
+	private Atividade atividades;
+	
 	public Bloco() {
 	}
 
-	public Bloco(Long id, Instant inicio, Instant fim) {
+	public Bloco(Long id, Instant inicio, Instant fim, Atividade atividades) {
 		super();
 		this.id = id;
 		this.inicio = inicio;
 		this.fim = fim;
+		this.atividades = atividades;
 	}
 
 	public Long getId() {
@@ -58,9 +65,17 @@ public class Bloco {
 		this.fim = fim;
 	}
 
+	public Atividade getAtividades() {
+		return atividades;
+	}
+
+	public void setAtividades(Atividade atividades) {
+		this.atividades = atividades;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(fim, id, inicio);
+		return Objects.hash(atividades, fim, id, inicio);
 	}
 
 	@Override
@@ -72,8 +87,8 @@ public class Bloco {
 		if (getClass() != obj.getClass())
 			return false;
 		Bloco other = (Bloco) obj;
-		return Objects.equals(fim, other.fim) && Objects.equals(id, other.id) && Objects.equals(inicio, other.inicio);
+		return Objects.equals(atividades, other.atividades) && Objects.equals(fim, other.fim)
+				&& Objects.equals(id, other.id) && Objects.equals(inicio, other.inicio);
 	}
-	
-	
+
 }
